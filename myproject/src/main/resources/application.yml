@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: myproject
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/guestbookdb?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: guestbook
+    password: guest1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+
+
+
+
+
