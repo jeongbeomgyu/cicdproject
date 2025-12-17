@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: guest1234
+      MYSQL_DATABASE: guestbookdb
+    ports:
+      - "3307:3306"
+
+  backend:
+    build: ./myproject
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/guestbookdb
+      SPRING_DATASOURCE_USERNAME: guestbook
+      SPRING_DATASOURCE_PASSWORD: guest1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+  frontend:
+    build: ./frontend/nextjs-guestbook-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
