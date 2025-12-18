@@ -3,21 +3,32 @@ services:
   mysql:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: guest1234
+      MYSQL_ROOT_PASSWORD: root1234
       MYSQL_DATABASE: guestbookdb
+      MYSQL_USER: guestbook       
+      MYSQL_PASSWORD: guest1234
     ports:
       - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot1234"]
+      interval: 3s  # 3초마다 체크
+      timeout: 3s
+      retries: 10
+      start_period: 20s
 
   backend:
     build: ./myproject
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/guestbookdb
       SPRING_DATASOURCE_USERNAME: guestbook
       SPRING_DATASOURCE_PASSWORD: guest1234
+      SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT: 30000
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
   frontend:
