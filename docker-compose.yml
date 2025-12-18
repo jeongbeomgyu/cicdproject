@@ -34,7 +34,7 @@ services:
 
   frontend:
     # build: ./frontend/nextjs-guestbook-app -> docker hub 에서 받아오는 것으로 변경
-    image: jeongbeomgyu/miniproject-backend:latest
+    image: jeongbeomgyu/miniproject-frontend:latest
     ports:
       - "3000:3000"
     depends_on:
