@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://localhost:8080/api/guestbook';
+// localhost 를 하드코딩한 부분을 수정 
+// const API_BASE_URL = 'http://localhost:8080/api/guestbook';
+
+// 환경 변수가 있으면 사용하고, 없으면 기본값으로 localhost를 사용
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL 
+  ? `${process.env.NEXT_PUBLIC_API_URL}/api/guestbook` 
+  : 'http://localhost:8080/api/guestbook';
 
 export default function Home() {
   const [guestBooks, setGuestBooks] = useState([]);
