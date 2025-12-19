@@ -18,7 +18,7 @@ public class CorsConfig {
         config.addAllowedOriginPattern("*");
         
         // 프론트엔드 포트 허용 (Next.js 기본 포트: 3000)
-        config.addAllowedOrigin("http://localhost:3000");
+        // config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
         config.setAllowCredentials(true);
