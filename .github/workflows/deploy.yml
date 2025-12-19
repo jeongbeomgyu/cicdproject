@@ -31,7 +31,9 @@ jobs:
         run: |
           docker build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/miniproject-backend ./myproject
           docker push ${{ secrets.DOCKER_USERNAME }}/miniproject-backend
-          docker build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/miniproject-frontend ./frontend/nextjs-guestbook-app
+         docker build --platform linux/amd64 \
+            --build-arg NEXT_PUBLIC_API_URL=http://34.207.244.215:8080 \
+            -t ${{ secrets.DOCKER_USERNAME }}/miniproject-frontend ./frontend/nextjs-guestbook-app
           docker push ${{ secrets.DOCKER_USERNAME }}/miniproject-frontend
 
       - name: Deploy to EC2
