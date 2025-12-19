@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/guestbook")
+@CrossOrigin(origins = "*")
 public class GuestBookController {
 
     private final GuestBookService guestBookService;
