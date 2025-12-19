@@ -40,4 +40,4 @@ services:
     depends_on:
       - backend
     environment:
-      NEXT_PUBLIC_API_URL: 107.21.177.95:8080
+      NEXT_PUBLIC_API_URL: 34.207.119.65:8080
